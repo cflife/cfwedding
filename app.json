@@ -1,12 +1,35 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/love/love",
+    "pages/we/we"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor":"#d4237a",
+    "list": [
+      {
+        "pagePath": "pages/love/love",
+        "iconPath": "images/tabbar2.png",
+        "selectedIconPath": "images/tabbar21.png",
+        "text": "爱情之路"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar1.png",
+        "selectedIconPath":"images/tabbar11.png"
+      },
+      {
+        "pagePath": "pages/we/we",
+        "iconPath": "images/tabbar3.png",
+        "selectedIconPath": "images/tabbar31.png",
+        "text": "我们"
+      }
+    ]
   }
 }
