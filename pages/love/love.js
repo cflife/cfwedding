@@ -1,66 +1,83 @@
-// pages/love/love.js
+import {
+  LoveModel
+} from '../../models/love'
+import {
+  LikeModel
+} from '../../models/like'
+let loveModel = new LoveModel()
+let likeModel = new LikeModel()
+import {
+  config
+} from '../../config'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    classic: null,
+    like: false,
+    count: 0,
+    latest: true,
+    first: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    loveModel.getLatest((data) => {
+      this._getLikeStatus(data.id, data.type)
+      this.setData({
+        classic: data
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  onPrevious: function (event) {
+    let index = this.data.classic.index
+    loveModel.getPrevious(index, (data) => {
+      if (data) {
+        this._getLikeStatus(data.id, data.type)
+        this.setData({
+          classic: data,
+          latest: loveModel.isLatest(data.index),
+          first: loveModel.isFirst(data.index)
+        })
+      } else {
+        console.log('not more classic')
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  onNext: function (event) {
+    let index = this.data.classic.index
+    loveModel.getNext(index, (data) => {
+      if (data) {
+        this._getLikeStatus(data.id, data.type)
+        this.setData({
+          classic: data,
+          latest: loveModel.isLatest(data.index),
+          first: loveModel.isFirst(data.index)
+        })
+      } else {
+        console.log('not more classic')
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  onLike: function (event) {
+    let like_or_cancel = event.detail.behavior
+    // console.log(this.data.classic,like_or_cancel)
+    likeModel.like(like_or_cancel, this.data.classic.id, this.data.classic.type)
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  _getLikeStatus: function (cid, type) {
+    likeModel.getClassicLikeStatus(cid, type, (data) => {
+      this.setData({
+        like: data.like_status,
+        count: data.fav_nums
+      })
+    })
   }
 })

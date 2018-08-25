@@ -16,8 +16,7 @@
       {
         "pagePath": "pages/love/love",
         "iconPath": "images/tabbar2.png",
-        "selectedIconPath": "images/tabbar21.png",
-        "text": "爱情之路"
+        "selectedIconPath": "images/tabbar21.png"
       },
       {
         "pagePath": "pages/index/index",
@@ -27,8 +26,7 @@
       {
         "pagePath": "pages/we/we",
         "iconPath": "images/tabbar3.png",
-        "selectedIconPath": "images/tabbar31.png",
-        "text": "我们"
+        "selectedIconPath": "images/tabbar31.png"
       }
     ]
   }
