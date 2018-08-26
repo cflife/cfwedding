@@ -4,6 +4,9 @@ import {
 import {
   LikeModel
 } from '../../models/like'
+import {
+  loveInfo
+} from '../../resources/love'
 let loveModel = new LoveModel()
 let likeModel = new LikeModel()
 import {
@@ -19,51 +22,77 @@ Page({
     like: false,
     count: 0,
     latest: true,
-    first: false
+    first: false,
+    loveStep: Number,
+    currentLove: Object,
+    firstIndex: Number
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    loveModel.getLatest((data) => {
-      this._getLikeStatus(data.id, data.type)
-      this.setData({
-        classic: data
-      })
+    this.setData({
+      loveStep: loveInfo.length,
+      firstIndex: loveInfo.length - 1,
+      currentLove: loveInfo[loveInfo.length - 1]
     })
+    //等待域名
+    // loveModel.getLatest((data) => {
+    //   this._getLikeStatus(data.id, data.type)
+    //   this.setData({
+    //     classic: data
+    //   })
+    // })
   },
 
   onPrevious: function (event) {
-    let index = this.data.classic.index
-    loveModel.getPrevious(index, (data) => {
-      if (data) {
-        this._getLikeStatus(data.id, data.type)
-        this.setData({
-          classic: data,
-          latest: loveModel.isLatest(data.index),
-          first: loveModel.isFirst(data.index)
-        })
-      } else {
-        console.log('not more classic')
-      }
+    let currentIndex = this.data.loveStep - 1
+    this.setData({
+      loveStep: currentIndex,
+      currentLove: loveInfo[currentIndex - 1],
+      latest: false,
+      first: currentIndex == 1 ? true : false
     })
+
+    //等待域名
+    // let index = this.data.classic.index
+    // loveModel.getPrevious(index, (data) => {
+    //   if (data) {
+    //     this._getLikeStatus(data.id, data.type)
+    //     this.setData({
+    //       classic: data,
+    //       latest: loveModel.isLatest(data.index),
+    //       first: loveModel.isFirst(data.index)
+    //     })
+    //   } else {
+    //     console.log('not more love')
+    //   }
+    // })
   },
 
   onNext: function (event) {
-    let index = this.data.classic.index
-    loveModel.getNext(index, (data) => {
-      if (data) {
-        this._getLikeStatus(data.id, data.type)
-        this.setData({
-          classic: data,
-          latest: loveModel.isLatest(data.index),
-          first: loveModel.isFirst(data.index)
-        })
-      } else {
-        console.log('not more classic')
-      }
+    let currentIndex = this.data.loveStep + 1
+    this.setData({
+      loveStep: currentIndex,
+      currentLove: loveInfo[this.data.loveStep],
+      latest: currentIndex - 1 == this.data.firstIndex ? true : false,
+      first: currentIndex == 1 ? true : false
     })
+    //等待域名
+    // let index = this.data.classic.index
+    // loveModel.getNext(index, (data) => {
+    //   if (data) {
+    //     this._getLikeStatus(data.id, data.type)
+    //     this.setData({
+    //       classic: data,
+    //       latest: loveModel.isLatest(data.index),
+    //       first: loveModel.isFirst(data.index)
+    //     })
+    //   } else {
+    //     console.log('not more classic')
+    //   }
+    // })
   },
 
   onLike: function (event) {

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/love/love",
+    "pages/index/index",
     "pages/we/we"
   ],
   "window": {
@@ -11,7 +11,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "selectedColor":"#d4237a",
+    "selectedColor": "#d4237a",
     "list": [
       {
         "pagePath": "pages/love/love",
@@ -21,7 +21,7 @@
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/tabbar1.png",
-        "selectedIconPath":"images/tabbar11.png"
+        "selectedIconPath": "images/tabbar11.png"
       },
       {
         "pagePath": "pages/we/we",

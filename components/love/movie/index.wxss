@@ -19,6 +19,7 @@
     /* margin:0 auto; */
     max-width:550rpx;
     font-size:36rpx;
+    margin-top: 57px;
   }
   
   .classic-container{
