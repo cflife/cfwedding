@@ -11,7 +11,7 @@ class LoveModel extends HTTP {
 
   getLatest(sCallback) {
     this.request({
-      url: 'classic/latest',
+      url: 'lastdistance',
       success: (data) => {
         let key = this._fullKey(data.index)
         wx.setStorageSync(key, data)

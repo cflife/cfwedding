@@ -1,10 +1,10 @@
 <view class="container">
     <view class="header">
-        <epsoide-cmp class="epsoide" index="{{loveStep}}" />
+        <epsoide-cmp class="epsoide" index="{{classic.id}}" />
         <view class="like-container">
-            <like-cmp bind:like="onLike" class="like" like="{{like}}" count="{{count}}" />
+            <like-cmp bind:like="onLike" class="like" like="{{like}}" count="{{classic.likeNum}}" />
         </view>
     </view>
-    <movie-cmp img="{{currentLove.path}}" content="{{currentLove.content}}" />
+    <movie-cmp img="{{classic.imgSrc}}" content="{{classic.content}}" />
     <navi-cmp class="navi" latest="{{latest}}" first="{{first}}" catch:left="onNext" catch:right="onPrevious" title="{{currentLove.title}}" />
 </view>
