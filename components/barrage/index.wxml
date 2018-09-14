@@ -1,0 +1,12 @@
+<view class="doommview">
+    <block wx:for="{{barrageData}}" wx:key="id">
+        <view class="aon">
+            <view class="header_box">
+                <image src="./images/cc.jpg" mode="aspectFit"/>
+            </view>
+            <view class="barrageText">
+                {{item.text}}
+            </view>
+        </view>
+    </block>
+</view>

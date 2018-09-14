@@ -1,0 +1,8 @@
+<view class="barrage-inputText">
+    <view class="barrage-input">
+        <input bindinput="inputing" value="{{sendTest}}"/>
+    </view>
+    <view class="barrage-shoot">
+        <button class="shoot" size="mini" bind:tap="send">发射</button>
+    </view>
+</view>
