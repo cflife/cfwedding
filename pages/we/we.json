@@ -1,1 +1,5 @@
-{}
+{
+    "usingComponents":{
+        "albums-cmp": "/components/albums/index"
+    }
+}

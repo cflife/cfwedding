@@ -1,2 +1,1 @@
-<!--pages/we/we.wxml-->
-<text>pages/we/we.wxml</text>
+<book-cmp book="{{item}}" class="book" />
