@@ -1,5 +1,5 @@
 <view bind:tap="onTap" class="container">
-  <image  src="{{album.image||album.img}}"></image>
+  <image mode="aspectFill"  src="{{album.cover||album.img}}"></image>
   <view class="description">
     <text class='title'>{{album.title}}</text>
     <text class='author'>{{album.describe}}</text>

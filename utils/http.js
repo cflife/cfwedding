@@ -7,30 +7,38 @@ class HTTP {
     }
 
     request(params) {
-        let url = this.baseRestUrl + params.url;
-        params.method = params.method ? params.method : 'GET'
-        wx.request({
-            url: url,
-            data: params.data,
-            method: params.method,
-            header: {
-                'content-type': 'application/json',
-                'appkey': config.appkey
-            },
-            success: function (res) {
-                let code = res.statusCode.toString()
-                if (code.startsWith('2')) {
-                    params.success && params.success(res.data)
-                } else {
-                    params.error && params.error(res)
+        return new Promise((resolve, reject) => {
+            let url = this.baseRestUrl + params.url;
+            params.method = params.method ? params.method : 'GET'
+            wx.request({
+                url: url,
+                data: params.data,
+                method: params.method,
+                header: {
+                    'content-type': 'application/json',
+                    'appkey': config.appkey
+                },
+                success: function (res) {
+                    let code = res.statusCode.toString()
+                    if (code.startsWith('2')) {
+                        resolve(res.data)
+                        // params.success && params.success(res.data)
+                    } else {
+                        reject(res)
+                        // params.error && params.error(res)
 
+                    }
+                },
+                fail: function (err) {
+                    reject(err)
+                    // params.fail && params.fail(err)
                 }
-            },
-            fail: function (err) {
-                params.fail && params.fail(err)
-            }
+            })
         })
+
     }
 }
 
-export {HTTP}
+export {
+    HTTP
+}
