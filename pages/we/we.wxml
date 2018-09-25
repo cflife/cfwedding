@@ -1,7 +1,7 @@
 <view class="sub-container">
     <view class="books-container">
         <block wx:for="{{books}}" wx:key="{{books.id}}">
-            <albums-cmp album="{{item}}" class="book" />
+            <albums-cmp bind:albumtap="albumClick" album="{{item}}" class="book" />
         </block>
     </view>
 </view>

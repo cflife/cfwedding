@@ -28,9 +28,6 @@ Component({
       this.triggerEvent('albumtap', {
         bid:this.properties.album.id
       }, {})
-      wx.navigateTo({
-        url: '../../pages/detail/detail?bid='+this.properties.album.id,
-      })
     }
   }
 })
