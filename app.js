@@ -32,6 +32,16 @@ App({
         }
       }
     })
+
+    //获取设备信息
+    wx.getSystemInfo({
+      success: function (res) {
+        wx.setStorage({
+          key:'systemInfo',
+          data:res
+        })
+      }
+    })
   },
   globalData: {
     userInfo: null

@@ -1,9 +1,9 @@
 <view class="container">
     <view class="head">
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-            <block wx:for="{{imgUrls}}">
+        <swiper indicator-dots="{{indicatorDots}}" bindchange="swiperchange" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{imgheights[current]}}px;">
+            <block wx:for="{{detail.imgs}}" wx:for-index="index" wx:key="{{id}}">
                 <swiper-item>
-                    <image src="{{item}}" class="slide-image" width="355" height="150" />
+                    <image data-id='{{index}}' src="{{item.src}}" bindload="imageLoad" />
                 </swiper-item>
             </block>
         </swiper>
@@ -21,24 +21,22 @@
     </view>
     <view class="sub-container">
         <text class="headline">内容简介</text>
-        <text decode="{{true}}" class="content">{{util.format(book.summary)}}</text>
+        <text decode="{{true}}" class="content">{{util.format(detail.content)}}</text>
     </view>
     <view class="sub-container">
-        <text class="headline">书本信息</text>
+        <text class="headline">相册信息</text>
         <view class="detail-contaner">
             <view class="vertical">
-                <text class="description">出版社</text>
-                <text class="description">出版年</text>
-                <text class="description">页数</text>
-                <text class="description">定价</text>
-                <text class="description">装帧</text>
+                <text class="description">主人公</text>
+                <text class="description">星座</text>
+                <text class="description">地点</text>
+                <text class="description">日期</text>
             </view>
             <view class="vertical">
-                <text class="">{{book.publisher}}</text>
-                <text class="">{{book.pubdate}}</text>
-                <text class="">{{book.pages}}</text>
-                <text class="">{{book.price}}</text>
-                <text class="">{{book.binding}}</text>
+                <text class="">{{albumInfo.master}}</text>
+                <text class="">{{albumInfo.constellation}}</text>
+                <text class="">{{albumInfo.place}}</text>
+                <text class="">{{albumInfo.date}}</text>
             </view>
         </view>
     </view>
@@ -71,3 +69,22 @@
     <input focus="{{posting}}" confirm-type="发送" class="post" placeholder='短评最多12个字' bindconfirm="onPost"></input>
     <!-- <image class="tip" src="/images/book/tip.png"></image> -->
 </view>
+
+
+<!-- <wxs module="util">
+  var limit = function(array, length) {
+    return array.slice(0, length)
+  }
+  var format = function(text){
+    if(!text){
+      return
+    }
+    var reg = getRegExp('\\\\n','g')
+    var text = text.replace(reg,'\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+    return text
+  }
+  module.exports = {
+    limit: limit,
+    format:format
+  }
+</wxs> -->

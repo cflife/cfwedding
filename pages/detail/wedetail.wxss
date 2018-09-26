@@ -7,11 +7,11 @@
   
   .head {
     background-color: #fff;
-    padding-top: 40rpx;
-    padding-bottom: 40rpx;
-    display: flex;
+    /* padding-top: 40rpx; */
+    /* padding-bottom: 40rpx; */
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
     /* box-shadow:1px 1px 1px #e3e3e3; */
   }
   
@@ -33,8 +33,8 @@
   }
   
   .head image {
-    width: 200rpx;
-    height: 300rpx;
+    width: 100%;
+    height: 100%;
     box-shadow:2px 2px 3px #e3e3e3;
   }
   
