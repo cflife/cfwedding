@@ -10,18 +10,21 @@ class LoveModel extends HTTP {
   }
 
   getLatest(sCallback) {
-    this.request({
-      url: 'lastdistance',
-      success: (data) => {
-        let key = this._fullKey(data.index)
-        wx.setStorageSync(key, data)
-        this._setLatestIndex(data.index)
-        sCallback(data)
-      }
+    var params = {
+      url: 'lastdistance'
+    }
+    this.request(params).then(data => {
+      let key = this._fullKey(data.id)
+      wx.setStorageSync(key, data)
+      this._setLatestIndex(data.id)
+      sCallback(data)
+    }, err => {
+
     })
   }
 
   getPrevious(index, sCallback) {
+    console.log(index)
     this._getClassic(index, 'previous', sCallback)
   }
 
@@ -67,14 +70,15 @@ class LoveModel extends HTTP {
     let classic = wx.getStorageSync(key)
     if (!classic) {
       let params = {
-        url: 'classic/' + index + '/' + next_or_previous,
-        success: (data) => {
-          let key = this._fullKey(data.index)
-          wx.setStorageSync(key, data)
-          sCallback(data)
-        }
+        url: 'distance/' + next_or_previous,
       }
-      this.request(params)
+      this.request(params).then(data => {
+        let key = this._fullKey(data.id)
+        wx.setStorageSync(key, data)
+        sCallback(data)
+      }, err => {
+
+      })
     } else {
       sCallback(classic)
     }
@@ -94,6 +98,7 @@ class LoveModel extends HTTP {
   }
 
   _fullKey(partKey) {
+    // console.log(partKey)
     let key = this.prefix + '-' + partKey
     return key
   }

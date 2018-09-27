@@ -18,7 +18,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classic: null,
+    distance: null,
     like: false,
     count: 0,
     latest: true,
@@ -31,24 +31,24 @@ Page({
   onLoad: function (options) {
     //等待域名
     loveModel.getLatest((data) => {
-      this._getLikeStatus(data.id, data.type)
-      console.log('返回',data)
+      console.log('数据', data)
+      //this._getLikeStatus(data.id, data.type)
       this.setData({
-        classic: data
+        distance: data
       })
     })
   },
 
   onPrevious: function (event) {
     //等待域名
-    let index = this.data.classic.id
+    let index = this.data.distance.id
     loveModel.getPrevious(index, (data) => {
       if (data) {
-        this._getLikeStatus(data.id, data.type)
+        //this._getLikeStatus(data.id, data.type)
         this.setData({
-          classic: data,
-          latest: loveModel.isLatest(data.index),
-          first: loveModel.isFirst(data.index)
+          distance: data,
+          latest: loveModel.isLatest(data.id),
+          first: loveModel.isFirst(data.id)
         })
       } else {
         console.log('not more love')
@@ -57,14 +57,14 @@ Page({
   },
 
   onNext: function (event) {
-    let index = this.data.classic.id
+    let index = this.data.distance.id
     loveModel.getNext(index, (data) => {
       if (data) {
-        this._getLikeStatus(data.id, data.type)
+        //this._getLikeStatus(data.id, data.type)
         this.setData({
-          classic: data,
-          latest: loveModel.isLatest(data.index),
-          first: loveModel.isFirst(data.index)
+          distance: data,
+          latest: loveModel.isLatest(data.id),
+          first: loveModel.isFirst(data.id)
         })
       } else {
         console.log('not more classic')
