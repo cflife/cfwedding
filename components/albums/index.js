@@ -26,7 +26,7 @@ Component({
   methods: {
     onTap:function(event){
       this.triggerEvent('albumtap', {
-        bid:this.properties.album.id
+        aid:this.properties.album.id
       }, {})
     }
   }

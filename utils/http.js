@@ -16,7 +16,7 @@ class HTTP {
                 method: params.method,
                 header: {
                     'content-type': 'application/json',
-                    'appkey': config.appkey
+                    'token':wx.getStorageSync('token')
                 },
                 success: function (res) {
                     let code = res.statusCode.toString()

@@ -1,4 +1,6 @@
 //app.js
+import {HTTP} from './utils/http'
+let http = new HTTP()
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -10,6 +12,18 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        var params = {
+          url: 'token/user',
+          data:{
+            code:res.code
+          }
+        }
+        http.request(params).then(res=>{
+          if(res){
+            wx.setStorageSync('token',res.token)
+          }
+          // console.log('结果',res)
+        })
       }
     })
     // 获取用户信息

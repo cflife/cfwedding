@@ -12,9 +12,9 @@
         <text class="headline">短评</text>
         <text class="shadow" wx:if="{{noComment}}">还没有短评</text>
         <view class="comment-container">
-            <block wx:for="{{util.limit(comments,15)}}">
+            <block wx:for="{{util.limit(comments,15)}}" wx:key="{{comments.id}}">
                 <tag-cmp class="tag" text="{{item.content}}">
-                    <text class="num" slot="after">{{'+' + item.nums}}</text>
+                    <text class="num" slot="after">{{'+' + item.num}}</text>
                 </tag-cmp>
             </block>
         </view>
@@ -60,9 +60,9 @@
         <text class="cancel" bind:tap="onCancel">取消</text>
     </view>
     <view class="comment-container">
-        <block wx:for="{{util.limit(comments, 3)}}">
+        <block wx:for="{{util.limit(comments, 3)}}" wx:key="{comments.id}">
             <tag-cmp bind:tapping="onPost" tag-class="tag" text="{{item.content}}">
-                <text class="num" slot="after">{{'+' + item.nums}}</text>
+                <text class="num" slot="after">{{'+' + item.num}}</text>
             </tag-cmp>
         </block>
     </view>
@@ -71,7 +71,7 @@
 </view>
 
 
-<!-- <wxs module="util">
+<wxs module="util">
   var limit = function(array, length) {
     return array.slice(0, length)
   }
@@ -87,4 +87,4 @@
     limit: limit,
     format:format
   }
-</wxs> -->
+</wxs>
