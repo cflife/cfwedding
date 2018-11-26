@@ -1,43 +1,65 @@
 import {
-    HTTP
-  } from '../utils/http.js'
-  class LikeModel extends HTTP {
-    constructor() {
-      super()
-    }
-  
-    getClassicLikeStatus(cid, type, success) {
+  HTTP
+} from '../utils/http.js'
+class LikeModel extends HTTP {
+  constructor() {
+    super()
+  }
+
+  getDistanceLikeStatus(did) {
+    return new Promise((resolve, reject) => {
       var params = {
-        url: 'classic/' + type + '/' + cid + '/favor',
-        success: success
+        url: 'distance/like/status/' + did,
       }
-      this.request(params)
-    }
-  
-    getBookLikeStatus(bid, type, success) {
+      this.request(params).then(res => {
+        resolve(res)
+      })
+    })
+
+  }
+
+  getAlbumLikeStatus(aid) {
+    return new Promise((resolve, reject) => {
       var params = {
-        url: 'book/' + type + '/' + bid + '/favor',
-        success: success
+        url: 'albums/like/status/' + aid,
       }
-      this.request(params)
-    }
-  
-    like(like_or_cancel, art_id, type) {
-      let url = like_or_cancel === 'cancel' ? 'like/cancel' : 'like'
+      this.request(params).then(res => {
+        resolve(res)
+      })
+    })
+  }
+
+  like(like_or_cancel, did) {
+    return new Promise((resolve, reject) => {
+      let url = like_or_cancel === 'cancel' ? 'distance/like/cancel' : 'distance/like'
       this.request({
         url: url,
         method: 'POST',
         data: {
-          art_id: art_id,
-          type: type
+          did: did,
         },
-        success: (data) => {
-          console.log(data)
-        }
+      }).then(res => {
+        resolve(res)
       })
-    }
+    })
   }
-  
-  export {
-    LikeModel
+
+  albumlike(like_or_cancel, aid) {
+    return new Promise((resolve, reject) => {
+      let url = like_or_cancel === 'cancel' ? 'albums/like/cancel' : 'albums/like'
+      this.request({
+        url: url,
+        method: 'POST',
+        data: {
+          aid: aid,
+        },
+      }).then(res => {
+        resolve(res)
+      })
+    })
   }
+}
+
+export {
+  LikeModel
+}

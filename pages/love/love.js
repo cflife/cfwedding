@@ -19,6 +19,7 @@ Page({
    */
   data: {
     distance: null,
+    likeInfo: {},
     like: false,
     count: 0,
     latest: true,
@@ -33,10 +34,14 @@ Page({
     loveModel.getLatest((data) => {
       console.log('数据', data)
       //this._getLikeStatus(data.id, data.type)
-      this.setData({
-        distance: data
+      likeModel.getDistanceLikeStatus(data.id).then(res => {
+        this.setData({
+          likeInfo: res,
+          distance: data
+        })
       })
     })
+    
   },
 
   onPrevious: function (event) {
@@ -54,6 +59,11 @@ Page({
         console.log('not more love')
       }
     })
+    likeModel.getDistanceLikeStatus(index - 1).then(res => {
+      this.setData({
+        likeInfo: res
+      })
+    })
   },
 
   onNext: function (event) {
@@ -70,12 +80,17 @@ Page({
         console.log('not more classic')
       }
     })
+    likeModel.getDistanceLikeStatus(index + 1).then(res => {
+      this.setData({
+        likeInfo: res
+      })
+    })
   },
 
   onLike: function (event) {
     let like_or_cancel = event.detail.behavior
     // console.log(this.data.classic,like_or_cancel)
-    likeModel.like(like_or_cancel, this.data.classic.id, this.data.classic.type)
+    likeModel.like(like_or_cancel, this.data.distance.id)
   },
 
   _getLikeStatus: function (cid, type) {

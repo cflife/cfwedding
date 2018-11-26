@@ -30,6 +30,18 @@ class BookModel extends HTTP {
             })
         })
     }
+    getMyLike(){
+        return new Promise((resolve, reject) => {
+            var params = {
+                url: 'albums/like/myLike',
+            }
+            this.request(params).then(res => {
+                resolve(res)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
 }
 
 export {

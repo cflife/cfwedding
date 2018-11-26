@@ -31,7 +31,6 @@ Page({
   },
 
   albumClick: function (event) {
-    console.log(event.detail)
     wx.navigateTo({
       url: '../detail/wedetail?aid=' + event.detail.aid,
     })

@@ -46,7 +46,7 @@
         <text>输入短评</text>
     </view>
     <view class="like-container">
-        <like-cmp bind:like="onLike" class="like" like="{{like}}" count="{{count}}" />
+        <like-cmp bind:like="onLike" class="like" like="{{like}}" count="{{likeNum}}" />
         <img-btn-cmp class="share-btn" open-type="share">
             <image class="share" slot="img" src="/images/icon/share.png" />
         </img-btn-cmp>

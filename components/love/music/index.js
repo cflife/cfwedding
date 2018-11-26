@@ -6,9 +6,11 @@ Component({
   /**
    * 组件的属性列表
    */
+  behaviors: [loveBehavior],
+
   properties: {
     src: String,
-    title: String
+    title:String
   },
 
   /**
@@ -20,27 +22,28 @@ Component({
     playingUrl: 'images/player@playing.png'
   },
 
-  attached: function () {
+  attached: function() {
     this._recoverPlaying()
     this._monitorSwitch()
   },
 
-  detached: function () {
-
+  detached: function() {
+    // wx.pauseBackgroundAudio()
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    onPlay: function (event) {
+    onPlay: function(event) {
       if (!this.data.playing) {
         this.setData({
           playing: true,
         })
-        if (mMgr.src == this.properties.src) {
+        if(mMgr.src == this.properties.src){
           mMgr.play()
-        } else {
+        }
+        else{
           mMgr.src = this.properties.src
         }
         mMgr.title = this.properties.title
@@ -52,15 +55,15 @@ Component({
       }
     },
 
-    _recoverPlaying: function () {
-      if (mMgr.pause) {
+    _recoverPlaying: function() {
+      if (mMgr.paused) {
         this.setData({
           playing: false
         })
         return
       }
       if (mMgr.src == this.properties.src) {
-        if (!mMgr.pause) {
+        if (!mMgr.paused) {
           this.setData({
             playing: true
           })
@@ -68,7 +71,7 @@ Component({
       }
     },
 
-    _monitorSwitch: function () {
+    _monitorSwitch: function() {
       mMgr.onPlay(() => {
         this._recoverPlaying()
       })
@@ -78,9 +81,10 @@ Component({
       mMgr.onStop(() => {
         this._recoverPlaying()
       }),
-        mMgr.onEnded(() => {
-          this._recoverPlaying()
-        })
+      mMgr.onEnded(()=>{
+        this._recoverPlaying()
+      })
     }
+
   }
 })

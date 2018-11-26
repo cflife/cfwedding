@@ -3,7 +3,8 @@
     "pages/love/love",
     "pages/index/index",
     "pages/we/we",
-    "pages/detail/wedetail"
+    "pages/detail/wedetail",
+    "pages/my/my"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,14 +21,14 @@
         "selectedIconPath": "images/tabbar21.png"
       },
       {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar1.png",
-        "selectedIconPath": "images/tabbar11.png"
-      },
-      {
         "pagePath": "pages/we/we",
         "iconPath": "images/tabbar3.png",
         "selectedIconPath": "images/tabbar31.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "images/tabbar1.png",
+        "selectedIconPath": "images/tabbar11.png"
       }
     ]
   }
